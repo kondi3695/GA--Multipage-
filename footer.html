@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Footer Component — La Miette Bakery</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{margin:0;padding:0;}
+.preview-note{background:var(--warm);padding:40px 80px;text-align:center;}
+.preview-note h1{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--choc);margin-bottom:10px;}
+.preview-note p{color:var(--muted);font-size:.9rem;max-width:500px;margin:0 auto 24px;}
+</style>
+</head>
+<body>
+
+<div class="preview-note">
+  <h1>Footer Component</h1>
+  <p>This is the shared footer used across all pages of the La Miette Bakery website. Preview it below.</p>
+  <a href="index.html" class="btn btn-primary">← Back to Home</a>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-logo">La <span>Miette</span></div>
+      <p class="foot-about">Artisan bakery baking love into every crumb since 2009. Hyderabad's finest handcrafted baked goods, made fresh every single morning.</p>
+      <div style="margin-top:20px;display:flex;gap:10px;">
+        <a href="#" style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:var(--blush);text-decoration:none;font-size:.85rem;transition:all .2s;" onmouseover="this.style.background='var(--caramel)'" onmouseout="this.style.background='transparent'">𝕏</a>
+        <a href="#" style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:var(--blush);text-decoration:none;font-size:.85rem;transition:all .2s;" onmouseover="this.style.background='var(--caramel)'" onmouseout="this.style.background='transparent'">in</a>
+        <a href="#" style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:var(--blush);text-decoration:none;font-size:.85rem;transition:all .2s;" onmouseover="this.style.background='var(--caramel)'" onmouseout="this.style.background='transparent'">📷</a>
+        <a href="#" style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:var(--blush);text-decoration:none;font-size:.85rem;transition:all .2s;" onmouseover="this.style.background='var(--caramel)'" onmouseout="this.style.background='transparent'">f</a>
+      </div>
+    </div>
+    <div>
+      <div class="foot-h">Shop</div>
+      <ul class="foot-links">
+        <li><a href="shop.html?cat=cake">Cakes</a></li>
+        <li><a href="shop.html?cat=pastry">Pastries</a></li>
+        <li><a href="shop.html?cat=cookie">Cookies</a></li>
+        <li><a href="shop.html?cat=bread">Breads</a></li>
+        <li><a href="shop.html">All Products</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-h">Company</div>
+      <ul class="foot-links">
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-h">Help</div>
+      <ul class="foot-links">
+        <li><a href="#">Delivery Info</a></li>
+        <li><a href="#">Returns & Refunds</a></li>
+        <li><a href="#">Allergen Information</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+      <div style="margin-top:20px;">
+        <div style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--caramel);margin-bottom:10px;">Newsletter</div>
+        <div style="display:flex;gap:0;">
+          <input style="flex:1;padding:10px 12px;border:1px solid rgba(255,255,255,.15);border-right:0;border-radius:4px 0 0 4px;background:rgba(255,255,255,.08);font-family:'Jost',sans-serif;font-size:.8rem;color:#fff;outline:none;" placeholder="Your email">
+          <button style="padding:10px 14px;background:var(--caramel);color:#fff;border:none;border-radius:0 4px 4px 0;cursor:pointer;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;" onclick="showToast('Subscribed! Sweet deals incoming 🧁')">Go</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 La Miette Artisan Bakery. All rights reserved.</span>
+    <span style="display:flex;gap:16px;">
+      <a href="#" style="color:var(--dusty);text-decoration:none;font-size:.72rem;">Privacy</a>
+      <a href="#" style="color:var(--dusty);text-decoration:none;font-size:.72rem;">Terms</a>
+      <span>Made with 🧈 in Hyderabad</span>
+    </span>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+</body></html>
