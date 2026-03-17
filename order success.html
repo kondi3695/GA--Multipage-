@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Order Confirmed — La Miette Bakery</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{padding-top:72px;}
+.success-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 72px);text-align:center;padding:60px 40px;}
+.success-icon{font-size:5rem;margin-bottom:24px;animation:pop .5s ease;}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
+.success-title{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--choc);margin-bottom:14px;}
+.success-sub{font-size:1rem;color:var(--muted);line-height:1.7;max-width:460px;margin-bottom:32px;}
+.order-id-box{background:var(--warm);border:1.5px solid var(--blush);border-radius:8px;padding:18px 32px;display:inline-block;margin-bottom:44px;}
+.oi-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.oi-val{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--caramel);margin-top:4px;}
+.track-wrap{display:flex;gap:0;max-width:640px;width:100%;margin-bottom:50px;}
+.ts{flex:1;text-align:center;position:relative;}
+.ts::after{content:'';position:absolute;top:20px;left:50%;width:100%;height:2px;background:var(--blush);z-index:0;}
+.ts:last-child::after{display:none;}
+.ts-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;margin:0 auto 10px;position:relative;z-index:1;}
+.ts-dot.done{background:var(--green);color:#fff;}
+.ts-dot.active{background:var(--caramel);color:#fff;box-shadow:0 0 0 5px rgba(200,135,58,.2);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 5px rgba(200,135,58,.2)}50%{box-shadow:0 0 0 10px rgba(200,135,58,.1)}}
+.ts-dot.pending{background:var(--blush);color:var(--muted);}
+.ts-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;line-height:1.3;}
+.success-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:50px;}
+.info-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:640px;width:100%;}
+.info-card{background:var(--warm);border-radius:8px;padding:20px;text-align:center;}
+.info-card-icon{font-size:1.6rem;margin-bottom:10px;}
+.info-card-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--choc);margin-bottom:5px;}
+.info-card-text{font-size:.78rem;color:var(--muted);line-height:1.5;}
+@media(max-width:768px){.track-wrap{gap:0;}.ts-label{font-size:.6rem;}.info-cards{grid-template-columns:1fr;}.success-title{font-size:2rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">La <span>Miette</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="cart.html" class="cart-btn">🛒 Cart <span class="cart-badge">0</span></a></li>
+  </ul>
+  <button class="ham" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="success-wrap">
+  <div class="success-icon">🎉</div>
+  <h1 class="success-title">Order Placed!</h1>
+  <p class="success-sub">Thank you! Your delicious order is confirmed and our bakers are already on it. You'll receive a confirmation SMS and email shortly.</p>
+
+  <div class="order-id-box">
+    <div class="oi-label">Your Order ID</div>
+    <div class="oi-val" id="orderId">#LM-00000</div>
+  </div>
+
+  <div class="track-wrap">
+    <div class="ts"><div class="ts-dot done">✓</div><div class="ts-label">Order<br>Confirmed</div></div>
+    <div class="ts"><div class="ts-dot active">🧁</div><div class="ts-label">Being<br>Baked</div></div>
+    <div class="ts"><div class="ts-dot pending">📦</div><div class="ts-label">Quality<br>Check</div></div>
+    <div class="ts"><div class="ts-dot pending">🚚</div><div class="ts-label">Out for<br>Delivery</div></div>
+    <div class="ts"><div class="ts-dot pending">🏠</div><div class="ts-label">Delivered!</div></div>
+  </div>
+
+  <div class="success-actions">
+    <a href="shop.html" class="btn btn-primary">Continue Shopping</a>
+    <a href="index.html" class="btn btn-outline">Back to Home</a>
+  </div>
+
+  <div class="info-cards">
+    <div class="info-card"><div class="info-card-icon">📱</div><div class="info-card-title">SMS Updates</div><div class="info-card-text">You'll receive real-time updates on your order status via SMS.</div></div>
+    <div class="info-card"><div class="info-card-icon">⏰</div><div class="info-card-title">Estimated Time</div><div class="info-card-text">Your order will be delivered within your chosen time slot.</div></div>
+    <div class="info-card"><div class="info-card-icon">📞</div><div class="info-card-title">Need Help?</div><div class="info-card-text">Call us at +91 40 6677 8899. We're happy to assist you anytime.</div></div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <div><div class="foot-logo">La <span>Miette</span></div><p class="foot-about">Artisan bakery baking love into every crumb since 2009. Hyderabad's finest.</p></div>
+    <div><div class="foot-h">Shop</div><ul class="foot-links"><li><a href="shop.html?cat=cake">Cakes</a></li><li><a href="shop.html?cat=pastry">Pastries</a></li><li><a href="shop.html?cat=cookie">Cookies</a></li><li><a href="shop.html?cat=bread">Breads</a></li></ul></div>
+    <div><div class="foot-h">Company</div><ul class="foot-links"><li><a href="index.html#about">About Us</a></li><li><a href="index.html#contact">Contact</a></li></ul></div>
+    <div><div class="foot-h">Help</div><ul class="foot-links"><li><a href="#">Delivery Info</a></li><li><a href="#">Returns</a></li><li><a href="#">Allergens</a></li></ul></div>
+  </div>
+  <div class="foot-bottom"><span>© 2025 La Miette Artisan Bakery. All rights reserved.</span><span>Made with 🧈 in Hyderabad</span></div>
+</footer>
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+<script>
+const orderId=localStorage.getItem('lm_last_order')||('#LM-'+Math.floor(10000+Math.random()*90000));
+document.getElementById('orderId').textContent=orderId;
+updateAllBadges();
+</script>
+</body></html>
