@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Checkout — La Miette Bakery</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{padding-top:72px;}
+.co-wrap{display:grid;grid-template-columns:1fr 380px;gap:40px;padding:50px 80px 80px;}
+.steps{display:flex;gap:0;margin-bottom:36px;flex-wrap:wrap;}
+.step{display:flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding-right:22px;position:relative;}
+.step::after{content:'›';position:absolute;right:6px;color:var(--blush);font-size:1rem;}
+.step:last-child::after{display:none;}
+.step.active{color:var(--caramel);font-weight:600;}
+.step.done{color:var(--green);}
+.step-num{width:24px;height:24px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;}
+.step.done .step-num{background:var(--green);color:#fff;border-color:var(--green);}
+.step.active .step-num{background:var(--caramel);color:#fff;border-color:var(--caramel);}
+.co-section{background:var(--warm);border-radius:10px;padding:28px;margin-bottom:20px;}
+.cs-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--choc);margin-bottom:22px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group.full{grid-column:span 2;}
+.form-group label{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+.form-group input,.form-group select,.form-group textarea{padding:12px 14px;border:1.5px solid var(--blush);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:.9rem;color:var(--text);outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--caramel);}
+.form-group textarea{resize:vertical;min-height:80px;}
+.pay-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.pay-opt{border:1.5px solid var(--blush);border-radius:6px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;font-size:.82rem;color:var(--mocha);}
+.pay-opt.active,.pay-opt:hover{border-color:var(--caramel);background:rgba(200,135,58,.06);color:var(--caramel);}
+.pay-opt .poi{font-size:1.4rem;display:block;margin-bottom:6px;}
+.order-summary{background:var(--warm);border-radius:10px;padding:28px;position:sticky;top:90px;align-self:start;}
+.os-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--choc);margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--blush);}
+.os-row{display:flex;justify-content:space-between;margin-bottom:12px;font-size:.88rem;color:var(--mocha);}
+.os-row.total{font-weight:600;font-size:1rem;color:var(--choc);padding-top:14px;border-top:1px solid var(--blush);margin-top:8px;}
+.co-si{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--blush);}
+.co-si-img{width:52px;height:52px;border-radius:5px;overflow:hidden;flex-shrink:0;}
+.co-si-img img{width:100%;height:100%;object-fit:cover;}
+.co-si-name{font-size:.88rem;font-weight:500;color:var(--choc);}
+.co-si-meta{font-size:.75rem;color:var(--muted);}
+.co-si-price{margin-left:auto;font-family:'Playfair Display',serif;font-weight:700;color:var(--caramel);font-size:.95rem;}
+@media(max-width:1100px){.co-wrap{grid-template-columns:1fr;padding:30px 40px 60px;}.order-summary{position:static;}}
+@media(max-width:768px){.co-wrap{padding:20px 24px 50px;}.form-grid{grid-template-columns:1fr;}.form-group.full{grid-column:span 1;}.pay-opts{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">La <span>Miette</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="cart.html">Cart</a></li>
+    <li><a href="cart.html" class="cart-btn">🛒 Cart <span class="cart-badge">0</span></a></li>
+  </ul>
+  <button class="ham" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="co-wrap">
+  <div>
+    <div class="steps">
+      <div class="step done"><span class="step-num">✓</span>Cart</div>
+      <div class="step active"><span class="step-num">2</span>Delivery</div>
+      <div class="step"><span class="step-num">3</span>Payment</div>
+      <div class="step"><span class="step-num">4</span>Confirm</div>
+    </div>
+
+    <div class="co-section">
+      <div class="cs-title">📦 Delivery Information</div>
+      <div class="form-grid">
+        <div class="form-group"><label>First Name *</label><input id="fn" placeholder="Priya"></div>
+        <div class="form-group"><label>Last Name *</label><input id="ln" placeholder="Mehta"></div>
+        <div class="form-group"><label>Email *</label><input id="em" type="email" placeholder="priya@email.com"></div>
+        <div class="form-group"><label>Phone *</label><input id="ph" placeholder="+91 98765 43210"></div>
+        <div class="form-group full"><label>Address *</label><input id="addr" placeholder="Flat/House No, Street, Area, Landmark"></div>
+        <div class="form-group"><label>City</label><input placeholder="Hyderabad" value="Hyderabad"></div>
+        <div class="form-group"><label>Pincode</label><input placeholder="500033" maxlength="6"></div>
+        <div class="form-group full"><label>Delivery Note (optional)</label><textarea placeholder="Leave at gate, call on arrival, gift wrapping needed..."></textarea></div>
+      </div>
+    </div>
+
+    <div class="co-section">
+      <div class="cs-title">🕐 Delivery Schedule</div>
+      <div class="form-grid">
+        <div class="form-group"><label>Delivery Date *</label><input type="date" id="delDate"></div>
+        <div class="form-group"><label>Preferred Time</label>
+          <select>
+            <option>10:00 AM – 12:00 PM</option>
+            <option>12:00 PM – 2:00 PM</option>
+            <option>2:00 PM – 4:00 PM</option>
+            <option>4:00 PM – 6:00 PM</option>
+            <option>6:00 PM – 8:00 PM</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="co-section">
+      <div class="cs-title">💳 Payment Method</div>
+      <div class="pay-opts">
+        <div class="pay-opt active" onclick="selPay(this,'card')"><span class="poi">💳</span>Card</div>
+        <div class="pay-opt" onclick="selPay(this,'upi')"><span class="poi">📱</span>UPI</div>
+        <div class="pay-opt" onclick="selPay(this,'cod')"><span class="poi">💵</span>Cash on Delivery</div>
+      </div>
+      <div id="payDetails">
+        <div class="form-grid">
+          <div class="form-group full"><label>Card Number</label><input placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)"></div>
+          <div class="form-group"><label>Expiry</label><input placeholder="MM / YY" maxlength="7"></div>
+          <div class="form-group"><label>CVV</label><input placeholder="123" type="password" maxlength="3"></div>
+          <div class="form-group full"><label>Name on Card</label><input placeholder="PRIYA MEHTA"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-full" style="font-size:.9rem;padding:17px;" onclick="placeOrder()">Place Order & Pay →</button>
+    <div style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:12px;">🔒 256-bit SSL secured · Your payment info is safe</div>
+  </div>
+
+  <div>
+    <div class="order-summary">
+      <div class="os-title">Your Order</div>
+      <div id="coItems"></div>
+      <div style="margin-top:14px;" id="coSummary"></div>
+      <div style="text-align:center;font-size:.72rem;color:var(--muted);margin-top:14px;line-height:1.6;">By placing your order you agree to our Terms of Service and Privacy Policy</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <div><div class="foot-logo">La <span>Miette</span></div><p class="foot-about">Artisan bakery baking love into every crumb since 2009.</p></div>
+    <div><div class="foot-h">Shop</div><ul class="foot-links"><li><a href="shop.html">All Products</a></li></ul></div>
+    <div><div class="foot-h">Help</div><ul class="foot-links"><li><a href="#">Delivery Info</a></li><li><a href="#">Returns</a></li></ul></div>
+    <div><div class="foot-h">Contact</div><ul class="foot-links"><li><a href="index.html#contact">Get in touch</a></li></ul></div>
+  </div>
+  <div class="foot-bottom"><span>© 2025 La Miette Artisan Bakery.</span><span>Made with 🧈 in Hyderabad</span></div>
+</footer>
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+<script>
+const tomorrow=new Date();tomorrow.setDate(tomorrow.getDate()+1);
+const dateStr=tomorrow.toISOString().split('T')[0];
+document.getElementById('delDate').value=dateStr;
+document.getElementById('delDate').min=dateStr;
+
+function renderOrderSummary(){
+  const cart=getCart();
+  if(!cart.length){window.location='cart.html';return;}
+  document.getElementById('coItems').innerHTML=cart.map(c=>`
+    <div class="co-si">
+      <div class="co-si-img"><img src="${c.img}" alt="${c.name}"></div>
+      <div><div class="co-si-name">${c.name}</div><div class="co-si-meta">${c.size} × ${c.qty}</div></div>
+      <div class="co-si-price">₹${c.price*c.qty}</div>
+    </div>`).join('');
+  const sub=cart.reduce((s,c)=>s+c.price*c.qty,0);
+  const del=sub>=500?0:60;
+  const disc=Math.floor(sub*parseFloat(localStorage.getItem('lm_discount')||'0'));
+  const total=sub-disc+del;
+  document.getElementById('coSummary').innerHTML=`
+    <div class="os-row"><span>Subtotal</span><span>₹${sub}</span></div>
+    ${disc?`<div class="os-row" style="color:var(--green)"><span>Discount</span><span>−₹${disc}</span></div>`:''}
+    <div class="os-row"><span>Delivery</span><span>${del===0?'<span style="color:var(--green)">Free 🎉</span>':'₹'+del}</span></div>
+    <div class="os-row total"><span>Total</span><span>₹${total}</span></div>`;
+}
+
+function selPay(el,type){
+  document.querySelectorAll('.pay-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');
+  const pd=document.getElementById('payDetails');
+  if(type==='card'){
+    pd.innerHTML=`<div class="form-grid">
+      <div class="form-group full"><label>Card Number</label><input placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)"></div>
+      <div class="form-group"><label>Expiry</label><input placeholder="MM / YY" maxlength="7"></div>
+      <div class="form-group"><label>CVV</label><input placeholder="123" type="password" maxlength="3"></div>
+      <div class="form-group full"><label>Name on Card</label><input placeholder="PRIYA MEHTA"></div>
+    </div>`;
+  } else if(type==='upi'){
+    pd.innerHTML=`<div class="form-group"><label>UPI ID</label><input placeholder="yourname@upi"></div>`;
+  } else {
+    pd.innerHTML=`<div style="background:rgba(74,124,89,.1);border:1px solid rgba(74,124,89,.3);border-radius:6px;padding:16px;font-size:.85rem;color:var(--green);">✓ Pay when your order arrives. No extra charges. Our delivery partner will collect cash.</div>`;
+  }
+}
+function fmtCard(el){
+  let v=el.value.replace(/\D/g,'').substring(0,16);
+  el.value=v.replace(/(.{4})/g,'$1 ').trim();
+}
+function placeOrder(){
+  const fn=document.getElementById('fn').value.trim();
+  const em=document.getElementById('em').value.trim();
+  const addr=document.getElementById('addr').value.trim();
+  if(!fn){showToast('Please enter your first name');document.getElementById('fn').focus();return;}
+  if(!em||!em.includes('@')){showToast('Please enter a valid email');document.getElementById('em').focus();return;}
+  if(!addr){showToast('Please enter your delivery address');document.getElementById('addr').focus();return;}
+  const orderId='#LM-'+Math.floor(10000+Math.random()*90000);
+  localStorage.setItem('lm_last_order',orderId);
+  localStorage.removeItem('lm_cart');
+  localStorage.removeItem('lm_discount');
+  window.location='order-success.html';
+}
+renderOrderSummary();
+</script>
+</body></html>
