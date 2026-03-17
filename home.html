@@ -1,147 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Miette Bakery</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>La Miette — Artisan Bakery</title>
+<link rel="stylesheet" href="shared.css">
 <style>
-:root {
-  --cream:#fdf6ee; --warm:#fffcf7; --caramel:#c8873a; --caramel-d:#a06828;
-  --choc:#3b1f0e; --mocha:#6b3f1f; --blush:#f0d5bc; --dusty:#e8b89a;
-  --gold:#d4a84b; --text:#2a1508; --muted:#8a6a52; --green:#4a7c59;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
- 
-/* ── PAGE SYSTEM ── */
-.page{display:none;min-height:100vh;padding-top:72px;}
-.page.active{display:block;}
- 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;
-  justify-content:space-between;padding:0 60px;height:72px;
-  background:rgba(253,246,238,0.96);backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(200,135,58,0.15);box-shadow:0 2px 20px rgba(59,31,14,0.06);}
-.logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;font-style:italic;
-  color:var(--choc);cursor:pointer;text-decoration:none;}
-.logo span{color:var(--caramel);}
-.nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
-.nav-links a{font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mocha);
-  text-decoration:none;cursor:pointer;transition:color .2s;}
-.nav-links a:hover{color:var(--caramel);}
-.cart-btn{display:flex;align-items:center;gap:8px;background:var(--choc);color:var(--cream);
-  padding:9px 20px;border-radius:3px;border:none;cursor:pointer;font-family:'Jost',sans-serif;
-  font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;transition:background .2s;}
-.cart-btn:hover{background:var(--caramel);}
-.cart-badge{background:var(--caramel);color:#fff;border-radius:50%;width:18px;height:18px;
-  font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
-.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
-.ham span{width:22px;height:2px;background:var(--choc);display:block;}
- 
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 32px;border:none;
-  border-radius:3px;cursor:pointer;font-family:'Jost',sans-serif;font-size:0.82rem;
-  letter-spacing:0.1em;text-transform:uppercase;transition:all .25s;text-decoration:none;}
-.btn-primary{background:var(--caramel);color:#fff;}
-.btn-primary:hover{background:var(--caramel-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,135,58,.35);}
-.btn-dark{background:var(--choc);color:#fff;}
-.btn-dark:hover{background:var(--caramel);transform:translateY(-2px);}
-.btn-outline{background:transparent;color:var(--choc);border:1.5px solid var(--choc);}
-.btn-outline:hover{background:var(--choc);color:#fff;}
-.btn-green{background:var(--green);color:#fff;}
-.btn-green:hover{background:#3a6347;transform:translateY(-2px);}
-.btn-sm{padding:9px 20px;font-size:0.75rem;}
-.btn-full{width:100%;justify-content:center;}
- 
-/* ── TOAST ── */
-.toast{position:fixed;bottom:28px;right:28px;background:var(--choc);color:#fff;
-  padding:14px 22px;border-radius:4px;font-size:0.85rem;border-left:3px solid var(--caramel);
-  box-shadow:0 10px 30px rgba(0,0,0,.2);z-index:9999;
-  transform:translateY(80px);opacity:0;transition:all .3s;max-width:320px;}
-.toast.show{transform:translateY(0);opacity:1;}
- 
-/* ════════════════════════════════════════
-   HOME PAGE
-════════════════════════════════════════ */
+body{padding-top:72px;}
 .hero{min-height:calc(100vh - 72px);display:grid;grid-template-columns:1fr 1fr;overflow:hidden;}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 70px 60px 80px;}
-.hero-tag{font-size:0.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--caramel);
-  font-weight:500;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 60px 60px 80px;}
+.hero-tag{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--caramel);font-weight:500;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
 .hero-tag::before{content:'';width:36px;height:1px;background:var(--caramel);}
-.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,5.5vw,5rem);
-  font-weight:900;line-height:1.0;color:var(--choc);margin-bottom:22px;}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,5.5vw,5rem);font-weight:900;line-height:1.0;color:var(--choc);margin-bottom:22px;}
 .hero-h1 em{font-style:italic;color:var(--caramel);display:block;}
 .hero-sub{font-size:1rem;color:var(--muted);line-height:1.7;max-width:400px;margin-bottom:40px;font-weight:300;}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
 .hero-stats{display:flex;gap:36px;margin-top:56px;padding-top:36px;border-top:1px solid var(--blush);}
 .stat-n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--caramel);}
-.stat-l{font-size:0.72rem;color:var(--muted);margin-top:2px;letter-spacing:.05em;}
+.stat-l{font-size:.72rem;color:var(--muted);margin-top:2px;}
 .hero-right{background:var(--blush);position:relative;overflow:hidden;}
 .hero-imgs{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;}
 .hero-imgs div{overflow:hidden;}
 .hero-imgs img{width:100%;height:100%;object-fit:cover;transition:transform 6s;}
 .hero-imgs div:hover img{transform:scale(1.06);}
-.float-badge{position:absolute;bottom:40px;left:-24px;background:var(--choc);color:var(--cream);
-  padding:16px 24px;border-radius:4px;font-family:'Playfair Display',serif;font-size:.9rem;font-style:italic;
-  box-shadow:0 20px 50px rgba(59,31,14,.25);animation:fl 4s ease-in-out infinite;z-index:2;}
+.float-badge{position:absolute;bottom:40px;left:-24px;background:var(--choc);color:var(--cream);padding:16px 24px;border-radius:4px;font-family:'Playfair Display',serif;font-size:.9rem;font-style:italic;box-shadow:0 20px 50px rgba(59,31,14,.25);animation:fl 4s ease-in-out infinite;z-index:2;}
 @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
- 
-/* marquee */
-.mq{background:var(--choc);padding:16px 0;overflow:hidden;white-space:nowrap;}
-.mq-track{display:inline-flex;animation:mq 22s linear infinite;}
-.mq-item{font-family:'Playfair Display',serif;font-size:.95rem;font-style:italic;color:var(--blush);padding:0 28px;}
-.mq-dot{color:var(--caramel);}
-@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
- 
-/* featured section */
-.sec{padding:80px 80px;}
-.sec-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;}
-.sec-tag{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--caramel);
-  font-weight:500;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
-.sec-tag::before{content:'';width:28px;height:1px;background:var(--caramel);}
-.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.8rem);
-  font-weight:900;color:var(--choc);line-height:1.1;}
-.sec-title em{font-style:italic;color:var(--caramel);}
- 
-/* product cards */
-.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
-.prod-card{background:var(--warm);border-radius:8px;overflow:hidden;
-  box-shadow:0 2px 16px rgba(59,31,14,.06);transition:all .3s;cursor:pointer;position:relative;}
-.prod-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(59,31,14,.14);}
-.prod-img{height:200px;overflow:hidden;position:relative;}
-.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
-.prod-card:hover .prod-img img{transform:scale(1.08);}
-.prod-badge{position:absolute;top:12px;left:12px;background:var(--caramel);color:#fff;
-  font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:2px;}
-.prod-body{padding:18px;}
-.prod-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;
-  color:var(--choc);margin-bottom:6px;}
-.prod-desc{font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:14px;}
-.prod-foot{display:flex;justify-content:space-between;align-items:center;}
-.prod-price{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--caramel);}
-.prod-orig{font-size:.75rem;color:var(--muted);text-decoration:line-through;margin-left:4px;}
-.add-btn{width:34px;height:34px;border-radius:50%;background:var(--choc);color:#fff;
-  border:none;font-size:1.1rem;cursor:pointer;transition:all .2s;
-  display:flex;align-items:center;justify-content:center;}
-.add-btn:hover{background:var(--caramel);transform:scale(1.1);}
- 
-/* categories */
 .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-.cat-card{position:relative;height:180px;overflow:hidden;border-radius:8px;cursor:pointer;}
+.cat-card{position:relative;height:190px;overflow:hidden;border-radius:8px;cursor:pointer;text-decoration:none;display:block;}
 .cat-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
 .cat-card:hover img{transform:scale(1.08);}
-.cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(59,31,14,.75),transparent);
-  display:flex;align-items:flex-end;padding:18px;}
+.cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(59,31,14,.75),transparent);display:flex;align-items:flex-end;padding:18px;}
 .cat-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff;font-style:italic;}
 .cat-count{font-size:.72rem;color:var(--dusty);margin-top:2px;}
- 
-/* why us */
 .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:50px;}
-.why-card{padding:32px 24px;border-radius:8px;background:var(--warm);text-align:center;
-  border-top:3px solid transparent;transition:all .3s;}
+.why-card{padding:32px 24px;border-radius:8px;background:var(--warm);text-align:center;border-top:3px solid transparent;transition:all .3s;}
 .why-card:hover{border-top-color:var(--caramel);transform:translateY(-4px);}
 .why-icon{font-size:2rem;margin-bottom:16px;}
 .why-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--choc);margin-bottom:8px;}
 .why-desc{font-size:.8rem;color:var(--muted);line-height:1.6;}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px;}
+.rev-card{background:var(--warm);border-radius:8px;padding:28px;transition:all .3s;}
+.rev-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(59,31,14,.1);}
+.rev-q{font-family:'Playfair Display',serif;font-size:3rem;color:var(--caramel);line-height:.5;margin-bottom:14px;display:block;}
+.rev-text{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:var(--mocha);line-height:1.7;margin-bottom:20px;}
+.rev-author{display:flex;align-items:center;gap:12px;}
+.rev-av{width:40px;height:40px;border-radius:50%;background:var(--caramel);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:#fff;flex-shrink:0;}
+.rev-name{font-size:.88rem;font-weight:600;color:var(--choc);}
+.rev-stars{color:var(--gold);font-size:.75rem;margin-top:2px;}
+.rev-meta{font-size:.7rem;color:var(--muted);margin-top:1px;}
+.cform input,.cform textarea{width:100%;padding:12px 14px;border:1.5px solid rgba(255,255,255,.15);border-radius:4px;background:rgba(255,255,255,.08);font-family:'Jost',sans-serif;font-size:.88rem;color:#fff;outline:none;margin-bottom:12px;}
+.cform textarea{min-height:90px;resize:vertical;}
+.cform input::placeholder,.cform textarea::placeholder{color:rgba(255,255,255,.4);}
+@media(max-width:1100px){.hero{grid-template-columns:1fr;}.hero-right{height:280px;}.hero-left{padding:60px 40px;}.cat-grid{grid-template-columns:repeat(2,1fr);}.why-grid{grid-template-columns:repeat(2,1fr);}.rev-grid{grid-template-columns:repeat(2,1fr);}#cw{grid-template-columns:1fr!important;}}
+@media(max-width:768px){.hero-left{padding:40px 24px;}.rev-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">La <span>Miette</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="cart.html" class="cart-btn">🛒 Cart <span class="cart-badge">0</span></a></li>
+  </ul>
+  <button class="ham" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Est. 2009 · Hyderabad</div>
+    <h1 class="hero-h1">Baked with<br><em>Love &amp; Butter</em></h1>
+    <p class="hero-sub">Every morning before dawn, we craft pastries, cakes &amp; cookies that taste like home on its very best day.</p>
+    <div class="hero-btns">
+      <a href="shop.html" class="btn btn-primary">Shop Now →</a>
+      <a href="#about" class="btn btn-outline">Our Story</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-n">48+</div><div class="stat-l">Signature Items</div></div>
+      <div><div class="stat-n">15yr</div><div class="stat-l">Of Baking</div></div>
+      <div><div class="stat-n">4.9★</div><div class="stat-l">Avg Rating</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-imgs">
+      <div><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80" alt="Cake"></div>
+      <div><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" alt="Croissant"></div>
+      <div><img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&q=80" alt="Cookies"></div>
+      <div><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=80" alt="Pastry"></div>
+    </div>
+    <div class="float-badge">✦ Freshly baked every morning</div>
+  </div>
+</section>
+
+<div class="mq"><div class="mq-track"><span class="mq-item">Artisan Sourdough <span class="mq-dot">✦</span></span><span class="mq-item">Mille-Feuille <span class="mq-dot">✦</span></span><span class="mq-item">Chocolate Ganache Cake <span class="mq-dot">✦</span></span><span class="mq-item">Brown Butter Cookies <span class="mq-dot">✦</span></span><span class="mq-item">Croissants au Beurre <span class="mq-dot">✦</span></span><span class="mq-item">Custom Celebration Cakes <span class="mq-dot">✦</span></span><span class="mq-item">French Macarons <span class="mq-dot">✦</span></span><span class="mq-item">Artisan Sourdough <span class="mq-dot">✦</span></span><span class="mq-item">Mille-Feuille <span class="mq-dot">✦</span></span><span class="mq-item">Chocolate Ganache Cake <span class="mq-dot">✦</span></span><span class="mq-item">Brown Butter Cookies <span class="mq-dot">✦</span></span><span class="mq-item">Croissants au Beurre <span class="mq-dot">✦</span></span><span class="mq-item">Custom Celebration Cakes <span class="mq-dot">✦</span></span><span class="mq-item">French Macarons <span class="mq-dot">✦</span></span></div></div>
+
+<div class="sec">
+  <div class="sec-hd"><div><div class="sec-tag">Browse by</div><h2 class="sec-title">Shop by <em>Category</em></h2></div><a href="shop.html" class="btn btn-outline btn-sm">View All →</a></div>
+  <div class="cat-grid">
+    <a href="shop.html?cat=cake" class="cat-card"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80" alt="Cakes"><div class="cat-overlay"><div><div class="cat-name">Cakes</div><div class="cat-count">5 items</div></div></div></a>
+    <a href="shop.html?cat=pastry" class="cat-card"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" alt="Pastries"><div class="cat-overlay"><div><div class="cat-name">Pastries</div><div class="cat-count">4 items</div></div></div></a>
+    <a href="shop.html?cat=cookie" class="cat-card"><img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&q=80" alt="Cookies"><div class="cat-overlay"><div><div class="cat-name">Cookies</div><div class="cat-count">2 items</div></div></div></a>
+    <a href="shop.html?cat=bread" class="cat-card"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" alt="Breads"><div class="cat-overlay"><div><div class="cat-name">Breads</div><div class="cat-count">2 items</div></div></div></a>
+  </div>
+</div>
+
+<div class="sec" style="background:var(--warm);padding-top:60px;padding-bottom:80px;">
+  <div class="sec-hd"><div><div class="sec-tag">Handpicked</div><h2 class="sec-title">Featured <em>Items</em></h2></div><a href="shop.html" class="btn btn-outline btn-sm">View All →</a></div>
+  <div class="prod-grid" id="featuredGrid"></div>
+</div>
+
+<div class="sec" id="about">
+  <div class="sec-hd"><div><div class="sec-tag">Why Choose Us</div><h2 class="sec-title">Crafted with <em>Care</em></h2></div></div>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-icon">🌾</div><div class="why-title">Local Ingredients</div><div class="why-desc">Sourced from farms within 100km. Fresh, seasonal, honest.</div></div>
+    <div class="why-card"><div class="why-icon">🧈</div><div class="why-title">Real Butter Only</div><div class="why-desc">European-style cultured butter. Never margarine. Ever.</div></div>
+    <div class="why-card"><div class="why-icon">🌙</div><div class="why-title">Baked at 3 AM</div><div class="why-desc">So you get fresh baked goods when the doors open at 7.</div></div>
+    <div class="why-card"><div class="why-icon">🚀</div><div class="why-title">Same-Day Delivery</div><div class="why-desc">Order before noon and receive by evening, Hyderabad-wide.</div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-hd"><div><div class="sec-tag">Testimonials</div><h2 class="sec-title">What People <em>Say</em></h2></div></div>
+  <div class="rev-grid">
+    <div class="rev-card"><span class="rev-q">"</span><p class="rev-text">The Dark Chocolate Ganache cake was absolutely divine. Everyone at my anniversary dinner went completely silent after the first bite.</p><div class="rev-author"><div class="rev-av">P</div><div><div class="rev-name">Priya Mehta</div><div class="rev-stars">★★★★★</div><div class="rev-meta">Google · 2 weeks ago</div></div></div></div>
+    <div class="rev-card"><span class="rev-q">"</span><p class="rev-text">Best croissants I've had outside of Paris. The layers are perfect, the butter flavour is incredible. I come here every single Saturday morning.</p><div class="rev-author"><div class="rev-av">R</div><div><div class="rev-name">Rohan Kapoor</div><div class="rev-stars">★★★★★</div><div class="rev-meta">Zomato · 1 month ago</div></div></div></div>
+    <div class="rev-card"><span class="rev-q">"</span><p class="rev-text">Ordered a custom wedding cake and it was more beautiful than I imagined. The team was so professional and accommodating. Absolutely 5 stars!</p><div class="rev-author"><div class="rev-av">S</div><div><div class="rev-name">Sneha &amp; Aditya</div><div class="rev-stars">★★★★★</div><div class="rev-meta">Instagram · 3 weeks ago</div></div></div></div>
+  </div>
+</div>
+
+<div class="sec" id="contact" style="background:var(--choc);">
+  <div id="cw" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+    <div>
+      <div class="sec-tag" style="color:var(--gold)"><span style="background:var(--gold);width:28px;height:1px;display:inline-block;margin-right:10px;vertical-align:middle;"></span>Get In Touch</div>
+      <h2 class="sec-title" style="color:#fff;margin-bottom:28px;">Visit Us or <em style="color:var(--gold)">Order Online</em></h2>
+      <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:18px;"><div style="width:42px;height:42px;background:rgba(255,255,255,.08);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">📍</div><div><div style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--caramel);margin-bottom:3px;">Address</div><div style="font-size:.9rem;color:var(--blush);">12, Jubilee Hills Road No. 36<br>Hyderabad, Telangana 500033</div></div></div>
+      <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:18px;"><div style="width:42px;height:42px;background:rgba(255,255,255,.08);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">📞</div><div><div style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--caramel);margin-bottom:3px;">Phone</div><div style="font-size:.9rem;color:var(--blush);">+91 40 6677 8899</div></div></div>
+      <div style="display:flex;gap:14px;align-items:flex-start;"><div style="width:42px;height:42px;background:rgba(255,255,255,.08);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">🕐</div><div><div style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--caramel);margin-bottom:3px;">Hours</div><div style="font-size:.9rem;color:var(--blush);">Mon–Fri: 7AM–8PM<br>Sat: 7AM–9PM · Sun: 8AM–6PM</div></div></div>
+    </div>
+    <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:28px;">
+      <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:20px;">Send a Message</div>
+      <div class="cform">
+        <input placeholder="Your name">
+        <input type="email" placeholder="Your email">
+        <textarea placeholder="Your message"></textarea>
+        <button class="btn btn-primary btn-full" onclick="showToast('Message sent! We will reply within 2 hours 📬')">Send Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <div><div class="foot-logo">La <span>Miette</span></div><p class="foot-about">Artisan bakery baking love into every crumb since 2009. Hyderabad's finest handcrafted baked goods.</p></div>
+    <div><div class="foot-h">Shop</div><ul class="foot-links"><li><a href="shop.html?cat=cake">Cakes</a></li><li><a href="shop.html?cat=pastry">Pastries</a></li><li><a href="shop.html?cat=cookie">Cookies</a></li><li><a href="shop.html?cat=bread">Breads</a></li></ul></div>
+    <div><div class="foot-h">Company</div><ul class="foot-links"><li><a href="#about">About Us</a></li><li><a href="#contact">Contact</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul></div>
+    <div><div class="foot-h">Help</div><ul class="foot-links"><li><a href="#">Delivery Info</a></li><li><a href="#">Returns</a></li><li><a href="#">Allergens</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+  </div>
+  <div class="foot-bottom"><span>© 2025 La Miette Artisan Bakery. All rights reserved.</span><span>Made with 🧈 in Hyderabad</span></div>
+</footer>
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+<script>document.getElementById('featuredGrid').innerHTML=PRODUCTS.slice(0,8).map(p=>productCard(p)).join('');</script>
+</body></html>
