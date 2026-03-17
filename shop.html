@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Shop — La Miette Bakery</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{padding-top:72px;}
+.shop-hero{background:var(--warm);padding:40px 80px 32px;border-bottom:1px solid var(--blush);}
+.shop-hero h1{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--choc);}
+.shop-hero p{color:var(--muted);font-size:.9rem;margin-top:6px;}
+.breadcrumb{font-size:.78rem;color:var(--muted);margin-bottom:8px;}
+.breadcrumb a{color:var(--caramel);text-decoration:none;}
+.breadcrumb a:hover{text-decoration:underline;}
+.shop-layout{display:grid;grid-template-columns:240px 1fr;gap:40px;padding:40px 80px 80px;}
+.sidebar{position:sticky;top:90px;align-self:start;}
+.sidebar-sec{margin-bottom:28px;}
+.sidebar-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--choc);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--blush);}
+.filter-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.filter-list li{display:flex;align-items:center;gap:10px;cursor:pointer;padding:8px 12px;border-radius:4px;transition:background .2s;font-size:.85rem;color:var(--mocha);}
+.filter-list li:hover,.filter-list li.active{background:var(--blush);color:var(--choc);font-weight:500;}
+.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.price-range input[type=range]{width:100%;accent-color:var(--caramel);}
+.price-labels{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-top:6px;}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:12px;}
+.result-count{font-size:.85rem;color:var(--muted);}
+.sort-select{padding:8px 14px;border:1.5px solid var(--blush);border-radius:4px;background:var(--warm);font-family:'Jost',sans-serif;font-size:.82rem;color:var(--text);outline:none;cursor:pointer;}
+.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.no-results{grid-column:span 3;text-align:center;padding:60px;color:var(--muted);font-size:.9rem;}
+@media(max-width:1100px){.shop-layout{grid-template-columns:1fr;padding:24px 40px 60px;}.shop-hero{padding:30px 40px;}.sidebar{position:static;}.shop-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:768px){.shop-layout{padding:20px 24px 50px;}.shop-hero{padding:24px;}.shop-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">La <span>Miette</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html" class="active">Shop</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="cart.html" class="cart-btn">🛒 Cart <span class="cart-badge">0</span></a></li>
+  </ul>
+  <button class="ham" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="shop-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a> › Shop</div>
+  <h1>Our Bakery 🧁</h1>
+  <p>Everything is baked fresh daily — no preservatives, no shortcuts, no compromise.</p>
+</div>
+
+<div class="shop-layout">
+  <aside class="sidebar">
+    <div class="sidebar-sec">
+      <div class="sidebar-title">Categories</div>
+      <ul class="filter-list" id="catFilters">
+        <li class="active" data-cat="all" onclick="setFilter('all',this)"><span class="dot" style="background:var(--caramel)"></span>All Items <span style="margin-left:auto;font-size:.72rem;color:var(--muted);">12</span></li>
+        <li data-cat="cake" onclick="setFilter('cake',this)"><span class="dot" style="background:#c0392b"></span>Cakes <span style="margin-left:auto;font-size:.72rem;color:var(--muted);">5</span></li>
+        <li data-cat="pastry" onclick="setFilter('pastry',this)"><span class="dot" style="background:#e67e22"></span>Pastries <span style="margin-left:auto;font-size:.72rem;color:var(--muted);">4</span></li>
+        <li data-cat="cookie" onclick="setFilter('cookie',this)"><span class="dot" style="background:#f39c12"></span>Cookies <span style="margin-left:auto;font-size:.72rem;color:var(--muted);">2</span></li>
+        <li data-cat="bread" onclick="setFilter('bread',this)"><span class="dot" style="background:#8d6e63"></span>Breads <span style="margin-left:auto;font-size:.72rem;color:var(--muted);">2</span></li>
+      </ul>
+    </div>
+    <div class="sidebar-sec">
+      <div class="sidebar-title">Max Price</div>
+      <input type="range" min="50" max="2000" value="2000" id="priceRange" oninput="setPriceFilter(this.value)">
+      <div class="price-labels"><span>₹50</span><span id="priceMax">₹2000</span></div>
+    </div>
+    <div class="sidebar-sec">
+      <div class="sidebar-title">Sort By</div>
+      <ul class="filter-list" id="sortFilters">
+        <li class="active" onclick="setSort('default',this)">Featured</li>
+        <li onclick="setSort('price-asc',this)">Price: Low to High</li>
+        <li onclick="setSort('price-desc',this)">Price: High to Low</li>
+        <li onclick="setSort('name',this)">Name A–Z</li>
+      </ul>
+    </div>
+  </aside>
+  <div>
+    <div class="toolbar">
+      <div class="result-count" id="resultCount">Showing all 12 items</div>
+      <select class="sort-select" onchange="setSort(this.value,null)">
+        <option value="default">Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="name">Name A–Z</option>
+      </select>
+    </div>
+    <div class="shop-grid" id="shopGrid"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <div><div class="foot-logo">La <span>Miette</span></div><p class="foot-about">Artisan bakery baking love into every crumb since 2009.</p></div>
+    <div><div class="foot-h">Shop</div><ul class="foot-links"><li><a href="shop.html?cat=cake">Cakes</a></li><li><a href="shop.html?cat=pastry">Pastries</a></li><li><a href="shop.html?cat=cookie">Cookies</a></li><li><a href="shop.html?cat=bread">Breads</a></li></ul></div>
+    <div><div class="foot-h">Company</div><ul class="foot-links"><li><a href="index.html#about">About Us</a></li><li><a href="index.html#contact">Contact</a></li></ul></div>
+    <div><div class="foot-h">Help</div><ul class="foot-links"><li><a href="#">Delivery Info</a></li><li><a href="#">Returns</a></li></ul></div>
+  </div>
+  <div class="foot-bottom"><span>© 2025 La Miette Artisan Bakery.</span><span>Made with 🧈 in Hyderabad</span></div>
+</footer>
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+<script>
+let currentCat='all',currentSort='default',maxPrice=2000;
+function render(){
+  let p=[...PRODUCTS];
+  if(currentCat!=='all')p=p.filter(x=>x.cat===currentCat);
+  p=p.filter(x=>x.price<=maxPrice);
+  if(currentSort==='price-asc')p.sort((a,b)=>a.price-b.price);
+  else if(currentSort==='price-desc')p.sort((a,b)=>b.price-a.price);
+  else if(currentSort==='name')p.sort((a,b)=>a.name.localeCompare(b.name));
+  document.getElementById('shopGrid').innerHTML=p.length?p.map(x=>productCard(x)).join(''):'<div class="no-results">No items found. Try adjusting your filters.</div>';
+  document.getElementById('resultCount').textContent='Showing '+p.length+' item'+(p.length!==1?'s':'');
+}
+function setFilter(cat,el){
+  currentCat=cat;
+  document.querySelectorAll('#catFilters li').forEach(l=>l.classList.remove('active'));
+  el.classList.add('active');render();
+}
+function setSort(val,el){
+  currentSort=val;
+  if(el){document.querySelectorAll('#sortFilters li').forEach(l=>l.classList.remove('active'));el.classList.add('active');}
+  render();
+}
+function setPriceFilter(v){maxPrice=parseInt(v);document.getElementById('priceMax').textContent='₹'+v;render();}
+// Check URL params
+const params=new URLSearchParams(location.search);
+const cat=params.get('cat');
+if(cat){
+  currentCat=cat;
+  document.querySelectorAll('#catFilters li').forEach(l=>{if(l.dataset.cat===cat)l.classList.add('active');else l.classList.remove('active');});
+}
+render();
+</script>
+</body></html>
